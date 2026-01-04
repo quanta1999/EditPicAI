@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PicAI</string>
+    <string name="choose_style">Choose style for your image</string>
+</resources>

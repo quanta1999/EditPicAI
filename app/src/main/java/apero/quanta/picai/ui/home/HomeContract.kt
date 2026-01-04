@@ -1,0 +1,35 @@
+package apero.quanta.picai.ui.home
+
+import android.net.Uri
+import apero.quanta.picai.domain.model.Category
+import apero.quanta.picai.domain.model.ImageTemplate
+import apero.quanta.picai.domain.model.genimg.InputGeneration
+
+import apero.quanta.picai.domain.model.genimg.ImageResult
+
+data class HomeState(
+    val isLoading: Boolean = false,
+    val categories: List<Category> = emptyList(),
+    val selectedCategoryIndex: Int = 0,
+    val selectedStyle: ImageTemplate? = null,
+    val error: String? = null,
+    val selectedImageUri: Uri? = null,
+    val generatedImageResult: ImageResult? = null,
+)
+
+sealed class HomeIntent {
+    data object LoadData : HomeIntent()
+    data class SelectCategory(val index: Int) : HomeIntent()
+    data class SelectStyle(val style: ImageTemplate) : HomeIntent()
+    data object RetryLoadClick : HomeIntent()
+    data object GenImageClick : HomeIntent()
+    data class ImageSelected(val uri: Uri?) : HomeIntent()
+    data object PickImageClick : HomeIntent()
+}
+
+
+sealed class HomeEvent {
+    data object OpenImagePicker : HomeEvent()
+    data class ShowToast(val message: String) : HomeEvent()
+    data class ShowSnackBar(val message: String, val actionName: String = "Close") : HomeEvent()
+}
