@@ -1,9 +1,7 @@
 package apero.quanta.picai.ui.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import apero.quanta.picai.domain.model.TemplateModel
 import apero.quanta.picai.domain.model.genimg.InputGeneration
 import apero.quanta.picai.domain.usecase.GenImageUseCase
 import apero.quanta.picai.domain.usecase.GetCategoriesUseCase
@@ -121,11 +119,7 @@ class HomeViewModel @Inject constructor(
                 val file = fileUtils.uriToFile(selectedUri)
                 if (file != null) {
                     val inputGen = InputGeneration.ImageInputGeneration(
-                        style = TemplateModel(
-                            id = selectedStyle.id ?: "",
-                            name = selectedStyle.name ?: "",
-                            description = selectedStyle.description
-                        ),
+                        style = selectedStyle,
                         files = listOf(file.absolutePath)
                     )
 

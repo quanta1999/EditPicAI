@@ -1,5 +1,6 @@
 package apero.quanta.picai.network.auth
 
+import apero.quanta.picai.BuildConfig
 import apero.quanta.picai.data.remote.dto.auth.AuthData
 import apero.quanta.picai.data.remote.service.AuthApiService
 import apero.quanta.picai.data.remote.service.RefreshTokenRequest
@@ -41,7 +42,7 @@ class RefreshAuthUseCase @Inject constructor(
             val deviceId = deviceInfoProvider.getDeviceId()
             val loginAuthData =
                 authApiService.silentLogin(
-                    "tera.aiartgenerator.aiphoto.aiphotoenhancer",
+                    BuildConfig.BUNDLE_ID,
                     SilentLoginRequest(deviceId)
                 ).getOrThrow()
             tokenManager.saveTokens(
@@ -59,7 +60,7 @@ class RefreshAuthUseCase @Inject constructor(
         withContext(Dispatchers.IO) {
             val authData =
                 authApiService.refreshToken(
-                    "tera.aiartgenerator.aiphoto.aiphotoenhancer",
+                    BuildConfig.BUNDLE_ID,
                     RefreshTokenRequest(refreshToken)
                 ).getOrThrow()
             tokenManager.saveTokens(

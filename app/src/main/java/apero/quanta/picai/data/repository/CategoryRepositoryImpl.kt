@@ -2,7 +2,7 @@ package apero.quanta.picai.data.repository
 
 import apero.quanta.picai.data.remote.service.CategoryDatasource
 import apero.quanta.picai.domain.model.Category
-import apero.quanta.picai.domain.model.ImageTemplate
+import apero.quanta.picai.domain.model.Style
 import apero.quanta.picai.domain.repository.CategoryRepository
 import com.google.android.gms.common.util.CollectionUtils.isEmpty
 import javax.inject.Inject
@@ -16,7 +16,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 val styles = resultData.stylesByCategory[categoryDto.documentId]?.map { styleDto ->
                     val imageUrl = styleDto.thumbnails?.firstOrNull()?.url ?: styleDto.name
                     val styleName = styleDto.style?.firstOrNull()?.toString()
-                    ImageTemplate(
+                    Style(
                         id = styleDto.documentId,
                         name = styleName,
                         description = styleDto.description,

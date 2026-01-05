@@ -24,16 +24,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import apero.quanta.picai.domain.model.ImageTemplate
+import apero.quanta.picai.domain.model.Style
 import coil.compose.AsyncImage
 
 import androidx.compose.foundation.border
 
 @Composable
 fun TemplateStyleList(
-    styles: List<ImageTemplate>,
-    selectedStyle: ImageTemplate?,
-    onStyleSelected: (ImageTemplate) -> Unit,
+    styles: List<Style>,
+    selectedStyle: Style?,
+    onStyleSelected: (Style) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(16.dp),
@@ -55,7 +55,7 @@ fun TemplateStyleList(
 
 @Composable
 fun TemplateStyleItem(
-    style: ImageTemplate,
+    style: Style,
     isSelected: Boolean,
     onStyleClick: () -> Unit,
     modifier: Modifier = Modifier,
