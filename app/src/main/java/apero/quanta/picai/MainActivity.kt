@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     },
-                    snackbarHost = { SnackbarHost(snackbarHostState) }
+                    snackbarHost = { SnackbarHost(snackbarHostState, snackbar = { CustomSnackbar(it) }) }
                 ) { paddingValues ->
                     NavDisplay(
                         entries = navigationState.toEntries(entryProvider),
