@@ -15,7 +15,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
@@ -30,7 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import apero.quanta.picai.R
 import apero.quanta.picai.domain.model.Category
-import apero.quanta.picai.domain.model.ImageTemplate
+import apero.quanta.picai.domain.model.Style
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
@@ -39,9 +38,9 @@ import kotlinx.coroutines.launch
 fun StyleCategoriesList(
     styleCategories: List<Category>,
     selectedCategoryIndex: Int,
-    selectedStyle: ImageTemplate?,
+    selectedStyle: Style?,
     onCategorySelected: (Int) -> Unit,
-    onStyleClick: (ImageTemplate) -> Unit,
+    onStyleClick: (Style) -> Unit,
     isLoading: Boolean = false,
     modifier: Modifier = Modifier,
 ) {
