@@ -21,7 +21,7 @@ class SignatureInterceptor @Inject constructor(
     private fun addSignatureHeaders(requestBuilder: okhttp3.Request.Builder) {
         val currentTimeMillis = System.currentTimeMillis()
         val signatureData = SignatureParser.parseData(
-            keyId = BuildConfig.BUNDLE_ID,
+            keyId = BuildConfig.KEY_ID,
             publicKeyStr = BuildConfig.PUBLIC_KEY,
             timeStampParse = currentTimeMillis,
         )
