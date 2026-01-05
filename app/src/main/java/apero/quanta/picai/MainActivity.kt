@@ -46,10 +46,9 @@ class MainActivity : ComponentActivity() {
 
                 val entryProvider = entryProvider {
                     featureASection(
-                        onSubRouteClick = { navigator.navigate(HomeRoute) },
                         snackbarHostState = snackbarHostState
                     )
-                    featureBSection(onSubRouteClick = { navigator.navigate(HistoryRoute) })
+                    featureBSection()
                 }
 
                 Scaffold(
