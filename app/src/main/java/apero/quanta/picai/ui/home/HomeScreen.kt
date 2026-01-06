@@ -31,6 +31,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import apero.quanta.picai.ui.components.ImagePicker
 import apero.quanta.picai.ui.components.StyleCategoriesList
 
+import apero.quanta.picai.ui.components.CustomSnackbarVisuals
+
 @Composable
 fun HomeRoute(
     snackbarHostState: SnackbarHostState,
@@ -62,9 +64,12 @@ fun HomeRoute(
 
                 is HomeEvent.ShowSnackBar -> {
                     val snackbarResult = snackbarHostState.showSnackbar(
-                        message = event.message,
-                        actionLabel = "Close",
-                        duration = SnackbarDuration.Short
+                        CustomSnackbarVisuals(
+                            message = event.message,
+                            actionLabel = event.actionName,
+                            duration = SnackbarDuration.Short,
+                            containerColor = event.color
+                        )
                     )
                     when (snackbarResult) {
                         SnackbarResult.Dismissed -> {}

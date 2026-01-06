@@ -14,6 +14,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
@@ -26,6 +27,7 @@ import apero.quanta.picai.navigation.featureASection
 import apero.quanta.picai.navigation.featureBSection
 import apero.quanta.picai.navigation.rememberNavigationState
 import apero.quanta.picai.navigation.toEntries
+import apero.quanta.picai.ui.components.CustomSnackbar
 import apero.quanta.picai.ui.theme.PicAITheme
 import apero.quanta.picai.ui.theme.setEdgeToEdgeConfig
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +54,9 @@ class MainActivity : ComponentActivity() {
                         snackbarHostState = snackbarHostState,
                         onImageSelected = { history ->
                             navigator.navigate(ImageViewRoute(history))
+                        },
+                        onBack = {
+                            navigator.goBack()
                         }
                     )
                 }
@@ -76,7 +81,13 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     },
-                    snackbarHost = { SnackbarHost(snackbarHostState) }
+                    snackbarHost = {
+                        SnackbarHost(snackbarHostState) {
+                            CustomSnackbar(
+                                it,
+                            )
+                        }
+                    }
                 ) { paddingValues ->
                     NavDisplay(
                         entries = navigationState.toEntries(entryProvider),

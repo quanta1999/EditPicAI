@@ -1,6 +1,8 @@
 package apero.quanta.picai.ui.history
 
 import apero.quanta.picai.domain.model.History
+import androidx.compose.ui.graphics.Color
+
 
 data class HistoryState(
     val isLoading: Boolean = false,
@@ -15,6 +17,7 @@ sealed class HistoryIntent {
 
 }
 
+
 sealed class HistoryEvent {
-    data class ShowSnackBar(val message: String) : HistoryEvent()
+    data class ShowSnackBar(val message: String, val color: Color = Color.Red) : HistoryEvent()
 }

@@ -1,5 +1,6 @@
 package apero.quanta.picai.ui.home
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apero.quanta.picai.domain.model.History
@@ -16,7 +17,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -179,7 +179,7 @@ class HomeViewModel @Inject constructor(
                 val file = fileUtils.downloadImage(url)
                 _viewState.update { it.copy(isLoading = false) }
                 if (file != null) {
-                    _homeEvent.send(HomeEvent.ShowToast("Image downloaded to ${file.absolutePath}"))
+                    _homeEvent.send(HomeEvent.ShowSnackBar("Image download successfully", color = Color.Green))
                     insertHistoryUseCase(
                         history = History(
                             imagePath = file.absolutePath,
@@ -192,7 +192,7 @@ class HomeViewModel @Inject constructor(
                     _homeEvent.send(HomeEvent.ShowToast("Failed to download image"))
                 }
             } else {
-                _homeEvent.send(HomeEvent.ShowToast("No image URL found"))
+                _homeEvent.send(HomeEvent.ShowSnackBar("No image URL found"))
             }
         }
     }
