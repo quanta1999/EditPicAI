@@ -37,6 +37,8 @@ import apero.quanta.picai.domain.model.History
 import coil.compose.AsyncImage
 import java.io.File
 
+import apero.quanta.picai.ui.components.CustomSnackbarVisuals
+
 @Composable
 fun HistoryRoute(
     snackbarHostState: SnackbarHostState,
@@ -50,7 +52,12 @@ fun HistoryRoute(
         viewModel.historyEvent.collect { event ->
             when (event) {
                 is HistoryEvent.ShowSnackBar -> {
-                    snackbarHostState.showSnackbar(event.message)
+                    snackbarHostState.showSnackbar(
+                        CustomSnackbarVisuals(
+                            message = event.message,
+                            containerColor = event.color
+                        )
+                    )
                 }
             }
         }

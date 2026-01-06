@@ -27,7 +27,8 @@ fun EntryProviderScope<NavKey>.featureASection(
 
 fun EntryProviderScope<NavKey>.featureBSection(
     snackbarHostState: SnackbarHostState,
-    onImageSelected: (History) -> Unit
+    onImageSelected: (History) -> Unit,
+    onBack: () -> Unit
 ) {
     entry<HistoryRoute> {
         HistoryRouteScreen(
@@ -42,8 +43,9 @@ fun EntryProviderScope<NavKey>.featureBSection(
     entry<ImageViewRoute> { route ->
         ImageViewScreenRoute(
             history = route.history,
-            modifier = Modifier.fillMaxSize(),
-            snackbarHostState = snackbarHostState
+            onBack = onBack,
+            snackbarHostState = snackbarHostState,
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
