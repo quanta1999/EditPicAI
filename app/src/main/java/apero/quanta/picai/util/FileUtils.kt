@@ -28,4 +28,38 @@ class FileUtils @Inject constructor(
             null
         }
     }
-}
+
+
+        suspend fun downloadImage(url: String): File? = withContext(Dispatchers.IO) {
+
+            try {
+
+                val fileName = "downloaded_image_${System.currentTimeMillis()}.jpg"
+
+                val file = File(context.filesDir, fileName)
+
+                java.net.URL(url).openStream().use { inputStream ->
+
+                    FileOutputStream(file).use { outputStream ->
+
+                        inputStream.copyTo(outputStream)
+
+                    }
+
+                }
+
+                file
+
+            } catch (e: Exception) {
+
+                Log.e("FileUtils", "Error downloading image: ${e.message}", e)
+
+                null
+
+            }
+
+        }
+
+    }
+
+    

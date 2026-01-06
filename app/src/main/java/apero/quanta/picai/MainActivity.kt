@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import apero.quanta.picai.navigation.HomeRoute
+import apero.quanta.picai.navigation.ImageViewRoute
 import apero.quanta.picai.navigation.NavigationState
 import apero.quanta.picai.navigation.Navigator
 import apero.quanta.picai.navigation.TOP_LEVEL_ROUTES
@@ -47,7 +48,12 @@ class MainActivity : ComponentActivity() {
                     featureASection(
                         snackbarHostState = snackbarHostState
                     )
-                    featureBSection()
+                    featureBSection(
+                        snackbarHostState = snackbarHostState,
+                        onImageSelected = { history ->
+                            navigator.navigate(ImageViewRoute(history))
+                        }
+                    )
                 }
 
                 Scaffold(

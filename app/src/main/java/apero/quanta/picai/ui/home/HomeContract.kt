@@ -11,6 +11,7 @@ data class HomeState(
     val categories: List<Category> = emptyList(),
     val selectedCategoryIndex: Int = 0,
     val selectedStyle: Style? = null,
+    val genSuccess: Boolean = false,
     val error: String? = null,
     val selectedImageUri: Uri? = null,
     val generatedImageResult: ImageResult? = null,
@@ -24,6 +25,7 @@ sealed class HomeIntent {
     data object GenImageClick : HomeIntent()
     data class ImageSelected(val uri: Uri?) : HomeIntent()
     data object PickImageClick : HomeIntent()
+    data object DownloadImageClick : HomeIntent()
 }
 
 

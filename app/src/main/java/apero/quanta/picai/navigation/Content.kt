@@ -3,18 +3,19 @@ package apero.quanta.picai.navigation
 /**
  * Created by QuanTA on 05/01/2026.
  */
-import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
+import apero.quanta.picai.domain.model.History
+import apero.quanta.picai.ui.imageview.ImageViewScreenRoute
+import apero.quanta.picai.ui.history.HistoryRoute as HistoryRouteScreen
 import apero.quanta.picai.ui.home.HomeRoute as HomeRouteScreen
 
 fun EntryProviderScope<NavKey>.featureASection(
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
 ) {
     entry<HomeRoute> {
         HomeRouteScreen(
@@ -25,15 +26,24 @@ fun EntryProviderScope<NavKey>.featureASection(
 }
 
 fun EntryProviderScope<NavKey>.featureBSection(
+    snackbarHostState: SnackbarHostState,
+    onImageSelected: (History) -> Unit
 ) {
     entry<HistoryRoute> {
-        Column(
+        HistoryRouteScreen(
+            snackbarHostState = snackbarHostState,
+            onClickImage = { history ->
+                onImageSelected(history)
+            },
             modifier = Modifier.fillMaxSize()
-        ) {
-            Text(
-                text = "History",
-                textAlign = TextAlign.Center
-            )
-        }
+        )
+    }
+
+    entry<ImageViewRoute> { route ->
+        ImageViewScreenRoute(
+            history = route.history,
+            modifier = Modifier.fillMaxSize(),
+            snackbarHostState = snackbarHostState
+        )
     }
 }
