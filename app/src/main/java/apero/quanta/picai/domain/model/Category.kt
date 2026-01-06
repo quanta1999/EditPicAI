@@ -5,5 +5,5 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class Category(
     val title: String,
-    val styles: List<ImageTemplate>,
+    val styles: List<Style>,
 )

@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Immutable
 @Parcelize
-data class ImageTemplate(
+data class Style(
     val id: String? = null,
     val name: String? = null,
     val description: String? = null,

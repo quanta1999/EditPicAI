@@ -41,7 +41,7 @@ class GenImageRepositoryImpl @Inject constructor(
 
 
                 val generationRequest = ImageGenerationRequest(
-                    documentId = style.id,
+                    documentId = style.id ?: throw IllegalArgumentException("Style ID cannot be null"),
                     input = generationInputRequest,
                 )
 

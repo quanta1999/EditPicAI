@@ -2,8 +2,7 @@ package apero.quanta.picai.ui.home
 
 import android.net.Uri
 import apero.quanta.picai.domain.model.Category
-import apero.quanta.picai.domain.model.ImageTemplate
-import apero.quanta.picai.domain.model.genimg.InputGeneration
+import apero.quanta.picai.domain.model.Style
 
 import apero.quanta.picai.domain.model.genimg.ImageResult
 
@@ -11,7 +10,7 @@ data class HomeState(
     val isLoading: Boolean = false,
     val categories: List<Category> = emptyList(),
     val selectedCategoryIndex: Int = 0,
-    val selectedStyle: ImageTemplate? = null,
+    val selectedStyle: Style? = null,
     val error: String? = null,
     val selectedImageUri: Uri? = null,
     val generatedImageResult: ImageResult? = null,
@@ -20,7 +19,7 @@ data class HomeState(
 sealed class HomeIntent {
     data object LoadData : HomeIntent()
     data class SelectCategory(val index: Int) : HomeIntent()
-    data class SelectStyle(val style: ImageTemplate) : HomeIntent()
+    data class SelectStyle(val style: Style) : HomeIntent()
     data object RetryLoadClick : HomeIntent()
     data object GenImageClick : HomeIntent()
     data class ImageSelected(val uri: Uri?) : HomeIntent()
