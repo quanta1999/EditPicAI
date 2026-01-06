@@ -103,6 +103,10 @@ dependencies {
 
     // image loading
     implementation(libs.bundles.image.loading)
+    
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
 
     ksp(libs.dagger.hilt.compile)
     ksp(libs.androidx.room.compiler)

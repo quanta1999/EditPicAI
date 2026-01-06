@@ -1,10 +1,13 @@
 package apero.quanta.picai.ui.home
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import apero.quanta.picai.domain.model.History
 import apero.quanta.picai.domain.model.genimg.InputGeneration
 import apero.quanta.picai.domain.usecase.GenImageUseCase
 import apero.quanta.picai.domain.usecase.GetCategoriesUseCase
+import apero.quanta.picai.domain.usecase.InsertHistoryUseCase
 import apero.quanta.picai.util.FileUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -20,6 +23,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val genImageUseCase: GenImageUseCase,
+    private val insertHistoryUseCase: InsertHistoryUseCase,
     private val fileUtils: FileUtils
 ) : ViewModel() {
 
@@ -56,14 +60,21 @@ class HomeViewModel @Inject constructor(
             }
 
             is HomeIntent.SelectStyle -> {
-                _viewState.update { it.copy(selectedStyle = intent.style) }
+                _viewState.update {
+                    it.copy(
+                        selectedStyle = intent.style,
+                        genSuccess = false,
+                        generatedImageResult = null
+                    )
+                }
             }
 
             is HomeIntent.ImageSelected -> {
                 _viewState.update {
                     it.copy(
                         selectedImageUri = intent.uri,
-                        generatedImageResult = null
+                        generatedImageResult = null,
+                        genSuccess = false
                     )
                 }
             }
@@ -72,6 +83,10 @@ class HomeViewModel @Inject constructor(
                 viewModelScope.launch {
                     _homeEvent.send(HomeEvent.OpenImagePicker)
                 }
+            }
+
+            HomeIntent.DownloadImageClick -> {
+                downloadImage()
             }
         }
     }
@@ -129,6 +144,7 @@ class HomeViewModel @Inject constructor(
                         onSuccess = { imageResult ->
                             _viewState.update {
                                 it.copy(
+                                    genSuccess = true,
                                     isLoading = false,
                                     generatedImageResult = imageResult
                                 )
@@ -154,4 +170,31 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    private fun downloadImage() {
+        viewModelScope.launch {
+            val url = _viewState.value.generatedImageResult?.urlImage
+            if (url != null) {
+                _viewState.update { it.copy(isLoading = true) }
+                val file = fileUtils.downloadImage(url)
+                _viewState.update { it.copy(isLoading = false) }
+                if (file != null) {
+                    _homeEvent.send(HomeEvent.ShowSnackBar("Image download successfully", color = Color.Green))
+                    insertHistoryUseCase(
+                        history = History(
+                            imagePath = file.absolutePath,
+                            imageUrl = url,
+                            styleId = _viewState.value.selectedStyle?.id,
+                            createdAt = System.currentTimeMillis()
+                        )
+                    )
+                } else {
+                    _homeEvent.send(HomeEvent.ShowToast("Failed to download image"))
+                }
+            } else {
+                _homeEvent.send(HomeEvent.ShowSnackBar("No image URL found"))
+            }
+        }
+    }
 }
+        

@@ -61,7 +61,7 @@ fun ImagePicker(
                         2.dp, MaterialTheme.colorScheme.tertiary,
                         shape = RoundedCornerShape(8.dp)
                     ),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Fit
             )
 
             IconButton(
