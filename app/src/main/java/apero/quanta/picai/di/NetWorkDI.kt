@@ -1,11 +1,10 @@
 package apero.quanta.picai.di
 
 import android.content.Context
-import apero.quanta.picai.data.remote.service.AuthApiService
+import apero.quanta.picai.BuildConfig
 import apero.quanta.picai.data.remote.service.AiGenerationApiService
+import apero.quanta.picai.data.remote.service.AuthApiService
 import apero.quanta.picai.data.remote.service.CategoryDatasource
-import apero.quanta.picai.data.repository.GenImageRepositoryImpl
-import apero.quanta.picai.domain.repository.GenImageRepository
 import apero.quanta.picai.network.PicAIAuthRetrofit
 import apero.quanta.picai.network.PicAIServiceRetrofit
 import apero.quanta.picai.network.SignatureInterceptor
@@ -25,7 +24,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import apero.quanta.picai.BuildConfig
 
 
 @Module
@@ -58,13 +56,7 @@ object NetWorkDI {
         return retrofit.create(AiGenerationApiService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun provideAIGenerationRepository(
-        genImageRepositoryImpl: GenImageRepositoryImpl,
-    ): GenImageRepository {
-        return genImageRepositoryImpl
-    }
+
 
     @Provides
     @Singleton

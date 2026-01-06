@@ -131,19 +131,32 @@ fun HomeScreen(
 
         Button(
             onClick = {
-                onIntent(HomeIntent.GenImageClick)
+                if (state.genSuccess) {
+                    onIntent(HomeIntent.DownloadImageClick)
+                } else {
+                    onIntent(HomeIntent.GenImageClick)
+                }
             },
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .padding(10.dp)
         ) {
-            Text(
-                text = "Generate",
-                style = MaterialTheme.typography.bodyLarge,
-                color = Color.White,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
+           if(state.genSuccess){
+               Text(
+                   text = "Download Image",
+                   style = MaterialTheme.typography.bodyLarge,
+                   color = Color.White,
+                   modifier = Modifier.padding(vertical = 8.dp)
+               )
+           }else{
+               Text(
+                   text = "Generate",
+                   style = MaterialTheme.typography.bodyLarge,
+                   color = Color.White,
+                   modifier = Modifier.padding(vertical = 8.dp)
+               )
+           }
         }
     }
 }
