@@ -14,7 +14,6 @@ import androidx.navigation3.runtime.NavKey
 import apero.quanta.picai.ui.home.HomeRoute as HomeRouteScreen
 
 fun EntryProviderScope<NavKey>.featureASection(
-    onSubRouteClick: () -> Unit,
     snackbarHostState: SnackbarHostState
 ) {
     entry<HomeRoute> {
@@ -26,7 +25,6 @@ fun EntryProviderScope<NavKey>.featureASection(
 }
 
 fun EntryProviderScope<NavKey>.featureBSection(
-    onSubRouteClick: () -> Unit,
 ) {
     entry<HistoryRoute> {
         Column(

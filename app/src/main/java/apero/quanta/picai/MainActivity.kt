@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import apero.quanta.picai.navigation.HistoryRoute
 import apero.quanta.picai.navigation.HomeRoute
 import apero.quanta.picai.navigation.NavigationState
 import apero.quanta.picai.navigation.Navigator
@@ -71,7 +70,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     },
-                    snackbarHost = { SnackbarHost(snackbarHostState, snackbar = { CustomSnackbar(it) }) }
+                    snackbarHost = { SnackbarHost(snackbarHostState) }
                 ) { paddingValues ->
                     NavDisplay(
                         entries = navigationState.toEntries(entryProvider),
