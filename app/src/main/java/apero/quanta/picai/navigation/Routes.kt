@@ -17,6 +17,9 @@ data object HomeRoute : NavKey
 data object HistoryRoute : NavKey
 
 @Serializable
+data object SettingRoute : NavKey
+
+@Serializable
 data class ImageViewRoute(@Contextual val history : History) : NavKey
 data class NavBarItem(
     val icon: Int,
@@ -26,4 +29,5 @@ data class NavBarItem(
 val TOP_LEVEL_ROUTES = mapOf<NavKey, NavBarItem>(
     HomeRoute to NavBarItem(icon = R.drawable.ic_ai, description = "AI Beauty"),
     HistoryRoute to NavBarItem(icon = R.drawable.ic_history, description = "History"),
+    SettingRoute to NavBarItem(icon = R.drawable.ic_settings, description = "Settings"),
 )

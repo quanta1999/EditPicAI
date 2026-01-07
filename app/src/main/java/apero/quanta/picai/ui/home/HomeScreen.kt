@@ -86,7 +86,6 @@ fun HomeRoute(
             onIntent = viewModel::processIntent,
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color.White)
         )
     }
 }
@@ -151,14 +150,14 @@ fun HomeScreen(
                Text(
                    text = "Download Image",
                    style = MaterialTheme.typography.bodyLarge,
-                   color = Color.White,
+                   color = MaterialTheme.colorScheme.onBackground,
                    modifier = Modifier.padding(vertical = 8.dp)
                )
            }else{
                Text(
                    text = "Generate",
                    style = MaterialTheme.typography.bodyLarge,
-                   color = Color.White,
+                   color = MaterialTheme.colorScheme.onBackground,
                    modifier = Modifier.padding(vertical = 8.dp)
                )
            }
