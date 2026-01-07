@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apero.quanta.picai.domain.model.History
 import apero.quanta.picai.domain.usecase.DeleteHistoryUseCase
+import apero.quanta.picai.domain.usecase.GetAllHistoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -22,13 +23,22 @@ import java.io.File
 
 @HiltViewModel
 class ImageViewViewModel @Inject constructor(
-    private val deleteImageUseCase: DeleteHistoryUseCase
+    private val deleteImageUseCase: DeleteHistoryUseCase,
+    private val getAllHistoryUseCase: GetAllHistoryUseCase
 ) : ViewModel() {
     private val _viewState = MutableStateFlow(ImageViewState())
     val viewState: StateFlow<ImageViewState> = _viewState.asStateFlow()
 
     private val _imageViewEvent = Channel<ImageViewEvent>(Channel.BUFFERED)
     val imageViewEvent = _imageViewEvent.receiveAsFlow()
+
+    init {
+        viewModelScope.launch {
+            getAllHistoryUseCase().collect { histories ->
+                _viewState.update { it.copy(histories = histories) }
+            }
+        }
+    }
 
 
     fun processIntent(intent: ImageViewIntent) {
@@ -43,6 +53,7 @@ class ImageViewViewModel @Inject constructor(
     }
 
 
+
     private fun deleteHistory(history: History) {
         viewModelScope.launch {
             _viewState.update { it.copy(loading = true) }
@@ -51,11 +62,10 @@ class ImageViewViewModel @Inject constructor(
             if(file.exists()){
                 val deleted = file.delete()
                 if(!deleted){
-                    throw IllegalArgumentException("Failed to delete file: ${history.imagePath}")
+                    _viewState.update { it.copy(error = "Error deleting image") }
                 }
             }
             _viewState.update { it.copy(loading = false) }
-            _imageViewEvent.send(ImageViewEvent.OnClickBack)
             _imageViewEvent.send(ImageViewEvent.ShowSnackBar("Image deleted", Color.Red))
         }
 

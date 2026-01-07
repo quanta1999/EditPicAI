@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 
 data class ImageViewState (
     val history: History? = null,
+    val histories: List<History> = emptyList(),
     val message: String = String(),
     val loading: Boolean = false,
     val error: String? = null
