@@ -11,7 +11,7 @@ import java.io.FileOutputStream
 import javax.inject.Inject
 
 class FileUtils @Inject constructor(
-    @ApplicationContext
+    @param:ApplicationContext
     private val context: Context
 ) {
     suspend fun uriToFile(uri: Uri): File? = withContext(Dispatchers.IO) {
