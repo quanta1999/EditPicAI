@@ -179,7 +179,7 @@ class HomeViewModel @Inject constructor(
                 val file = fileUtils.downloadImage(url)
                 _viewState.update { it.copy(isLoading = false) }
                 if (file != null) {
-                    _homeEvent.send(HomeEvent.ShowSnackBar("Image download successfully", color = Color.Green))
+                    _homeEvent.send(HomeEvent.ShowSnackBar("Image download successfully", color = Color.Black))
                     insertHistoryUseCase(
                         history = History(
                             imagePath = file.absolutePath,
