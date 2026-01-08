@@ -13,6 +13,7 @@ import apero.quanta.picai.domain.model.History
 import apero.quanta.picai.ui.imageview.ImageViewScreenRoute
 import apero.quanta.picai.ui.history.HistoryRoute as HistoryRouteScreen
 import apero.quanta.picai.ui.home.HomeRoute as HomeRouteScreen
+import apero.quanta.picai.ui.settings.SettingRoute as SettingRouteScreen
 
 fun EntryProviderScope<NavKey>.featureASection(
     snackbarHostState: SnackbarHostState,
@@ -20,6 +21,14 @@ fun EntryProviderScope<NavKey>.featureASection(
     entry<HomeRoute> {
         HomeRouteScreen(
             snackbarHostState = snackbarHostState,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+fun EntryProviderScope<NavKey>.featureSettingSection() {
+    entry<SettingRoute> {
+        SettingRouteScreen(
             modifier = Modifier.fillMaxSize()
         )
     }

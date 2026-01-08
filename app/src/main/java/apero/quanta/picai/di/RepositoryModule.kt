@@ -3,9 +3,11 @@ package apero.quanta.picai.di
 import apero.quanta.picai.data.repository.CategoryRepositoryImpl
 import apero.quanta.picai.data.repository.GenImageRepositoryImpl
 import apero.quanta.picai.data.repository.HistoryRepositoryImpl
+import apero.quanta.picai.data.repository.SettingsRepositoryImpl
 import apero.quanta.picai.domain.repository.CategoryRepository
 import apero.quanta.picai.domain.repository.GenImageRepository
 import apero.quanta.picai.domain.repository.HistoryRepository
+import apero.quanta.picai.domain.repository.SettingsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,10 +30,26 @@ abstract class RepositoryModule {
         historyRepositoryImpl: HistoryRepositoryImpl
     ): HistoryRepository
 
-    @Binds
-    @Singleton
-    abstract fun provideAIGenerationRepository(
-        genImageRepositoryImpl: GenImageRepositoryImpl,
-    ): GenImageRepository
+        @Binds
 
-}
+        @Singleton
+
+        abstract fun provideAIGenerationRepository(
+
+            genImageRepositoryImpl: GenImageRepositoryImpl,
+
+        ): GenImageRepository
+
+    
+
+        @Binds
+
+        @Singleton
+
+        abstract fun bindSettingsRepository(
+
+            settingsRepositoryImpl: SettingsRepositoryImpl
+
+        ): SettingsRepository
+
+    }

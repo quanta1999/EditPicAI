@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">PicAI</string>
     <string name="choose_style">Choose style for your image</string>
+    <string name="settings_title">Settings</string>
+    <string name="appearance_title">Appearance</string>
+    <string name="theme_title">Theme</string>
+    <string name="dynamic_color_title">Dynamic Color</string>
+    <string name="dynamic_color_subtitle">Use system colors</string>
 </resources>

@@ -48,7 +48,6 @@ fun StyleCategoriesList(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .background(Color.White),
         ) {
             LoadingView()
         }
@@ -86,13 +85,12 @@ fun StyleCategoriesList(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White),
     ) {
         // Section title
         Text(
             text = stringResource(R.string.choose_style),
             style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 6.dp),
@@ -107,11 +105,9 @@ fun StyleCategoriesList(
                         .tabIndicatorOffset(pagerState.currentPage, matchContentSize = true)
                         .height(1.dp)
                         .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
-                        .background(color = Color.Black),
+                        .background(color = MaterialTheme.colorScheme.onBackground),
                 )
             },
-//            minTabWidth = TabRowDefaults.ScrollableTabRowEdgeStartPadding,
-            containerColor = Color.White,
             divider = {},
             edgePadding = 8.dp,
             modifier = Modifier.fillMaxWidth(),
@@ -140,11 +136,11 @@ fun StyleCategoriesList(
                         text = category.title,
                         style = if (isSelected) {
                             MaterialTheme.typography.bodySmall.copy(
-                                color = Color.Black,
+                                color = MaterialTheme.colorScheme.onBackground,
                             )
                         } else {
                             MaterialTheme.typography.bodySmall.copy(
-                                color = Color.Gray,
+                                color = MaterialTheme.colorScheme.onBackground.copy(0.7f),
                             )
                         },
                     )
