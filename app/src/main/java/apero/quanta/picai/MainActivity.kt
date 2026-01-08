@@ -48,8 +48,8 @@ class MainActivity : ComponentActivity() {
     lateinit var settingsRepository: SettingsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
         setContent {
             val themeMode by settingsRepository.getThemeMode().collectAsState(initial = ThemeMode.SYSTEM)
             val dynamicColor by settingsRepository.isDynamicColorEnabled().collectAsState(initial = true)
@@ -61,27 +61,14 @@ class MainActivity : ComponentActivity() {
             }
 
             LaunchedEffect(isDarkTheme) {
+                val systemBarStyle = if (isDarkTheme) {
+                    SystemBarStyle.dark(Color.TRANSPARENT)
+                } else {
+                    SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+                }
                 enableEdgeToEdge(
-                    statusBarStyle = if (isDarkTheme) {
-                        SystemBarStyle.dark(
-                            Color.TRANSPARENT
-                        )
-                    } else {
-                        SystemBarStyle.light(
-                            Color.TRANSPARENT,
-                            Color.TRANSPARENT
-                        )
-                    },
-                    navigationBarStyle = if (isDarkTheme) {
-                        SystemBarStyle.dark(
-                            Color.TRANSPARENT
-                        )
-                    } else {
-                        SystemBarStyle.light(
-                            Color.TRANSPARENT,
-                            Color.TRANSPARENT
-                        )
-                    }
+                    statusBarStyle = systemBarStyle,
+                    navigationBarStyle = systemBarStyle
                 )
             }
 
