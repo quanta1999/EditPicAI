@@ -40,7 +40,7 @@ Dự án sử dụng các công nghệ mới nhất trong hệ sinh thái Androi
 
 1. **Clone project:**
    ```bash
-   git clone https://github.com/quanta1999/EditPicAI.git
+   git clone https://github.com/quanta2ca4/EditPicAI.git
    ```
 
 2.**Build & Run:**
